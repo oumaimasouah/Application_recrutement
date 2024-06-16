@@ -2,42 +2,20 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CV extends Model
+class Cv extends Model
 {
-    use HasFactory;
-    protected $fillable = ['posteocuupe','diplome','languageParlee','LieuExp','dateDebut','dateFin','niveauLangue',
-    'Logiciels','dureeFormation','languageProgrammation','lieuFormation','anneeDiplome','mention'
-];
+    protected $fillable = [
+        'refCv', 'refProfessionnelle', 'refLinguistique', 'refFormation',
+        'refDiplome', 'infoInformatique', 'diplome', 'languesParlees', 
+        'lieuExp', 'dateDebut', 'dateFin', 'niveauLangue', 'logiciels', 
+        'dureeFormation', 'langageProgrammation', 'logicielUtilise', 'fonction', 
+        'titreDiplome', 'mention'
+    ];
 
-public function candidat()
+    public function candidat()
     {
         return $this->belongsTo(Candidat::class);
     }
-
-    public function demandeEmploi()
-    {
-        return $this->belongsTo(DemandeEmploi::class);
-    }
-
-   
-    public function getFormattedDateDebutAttribute()
-    {
-        return \Carbon\Carbon::parse($this->dateDebut)->format('d-m-Y');
-    }
-
-    public function getFormattedDateFinAttribute()
-    {
-        return \Carbon\Carbon::parse($this->dateFin)->format('d-m-Y');
-    }
-
-    
-    public function scopeWithLanguage($query, $language)
-    {
-        return $query->where('languageParlee', $language);
-    }
 }
-
-

@@ -4,38 +4,38 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateCvsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up()
     {
-        Schema::create('c_v_s', function (Blueprint $table) {
+        Schema::create('cvs', function (Blueprint $table) {
             $table->id();
-            $table->string("posteocuupe");
-            $table->string("diplome");
-            $table->string("languageParlee");
-            $table->string("LieuExp");
-            $table->date("dateDebut");
-            $table->date("dateFin");
-            $table->string("niveauLangue");
-            $table->string("Logiciels");
-            $table->string("dureeFormation");
-            $table->string("languageProgrammation");
-            $table->string("lieuFormation");
-            $table->string("anneeDiplome");
-            $table->string("mention");
-            $table->foreignId('candidat_id')->constrained()->onDelete('cascade');
+            $table->foreignId('candidat_id')->constrained('candidats');
+            $table->string('refCv')->unique();
+            $table->string('refProfessionnelle');
+            $table->string('refLinguistique');
+            $table->string('refFormation');
+            $table->string('refDiplome');
+            $table->text('infoInformatique');
+            $table->string('diplome');
+            $table->string('languesParlees');
+            $table->string('lieuExp');
+            $table->date('dateDebut');
+            $table->date('dateFin');
+            $table->string('niveauLangue');
+            $table->string('logiciels');
+            $table->integer('dureeFormation');
+            $table->string('langageProgrammation');
+            $table->string('logicielUtilise');
+            $table->string('fonction');
+            $table->string('titreDiplome');
+            $table->string('mention');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
-        Schema::dropIfExists('c_v_s');
+        Schema::dropIfExists('cvs');
     }
-};
+}

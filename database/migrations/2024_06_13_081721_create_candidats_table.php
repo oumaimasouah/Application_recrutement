@@ -4,20 +4,20 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRecruteursTable extends Migration
+class CreateCandidatsTable extends Migration
 {
     public function up()
     {
-        Schema::create('recruteurs', function (Blueprint $table) {
+        Schema::create('candidats', function (Blueprint $table) {
             $table->id();
             $table->foreignId('personne_id')->constrained('personnes');
-            $table->string('refRecruteur')->unique();
+            $table->string('refCandidat')->unique();
             $table->timestamps();
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('recruteurs');
+        Schema::dropIfExists('candidats');
     }
 }
